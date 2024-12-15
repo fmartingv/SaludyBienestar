@@ -1,0 +1,7 @@
+http://localhost/info.html 
+http://localhost:5601/app/management/kibana/indexPatterns/patterns/91db6060-b7e2-11ef-b276-dfdff3995bce#/?_a=(tab:indexedFields) elastic
+http://localhost:9200/_cat/indices?v elastic
+http://localhost:3000/ grafana
+
+
+psql -h localhost -p 5433 -U martin -d SaludyBienestar

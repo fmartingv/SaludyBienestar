@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Equipo - Supermercado Galicia</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="index.html" class="nav-link">Inicio</a></li>
+            <li><a href="productos.html" class="nav-link">Productos</a></li>
+            <li><a href="trabajadores.html" class="nav-link">Nuestro Equipo</a></li>
+            <li><a href="contacto.php" class="nav-link">Contacto</a></li>
+            <li><a href="info.html" class="nav-link">Información</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Nuestro Equipo</h1>
+        
+        <div class="grid" id="trabajadores-grid">
+            <!-- Los trabajadores se cargarán dinámicamente aquí -->
+        </div>
+    </div>
+
+    <div class="achievements">
+        <h2>Logros Destacados</h2>
+        <ul class="achievement-list">
+            <li><strong>2023:</strong> Reconocimiento al Mejor Supermercado Local.</li>
+            <li><strong>2022:</strong> Incorporamos productos ecológicos certificados.</li>
+            <li><strong>2021:</strong> Apertura de nuestra nueva sucursal en el centro.</li>
+        </ul>
+    </div>
+
+    <div class="schedule">
+        <h2>Horario del Equipo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Horario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunes a Viernes</td>
+                    <td>8:00 AM - 8:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Sábado</td>
+                    <td>9:00 AM - 6:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Domingo</td>
+                    <td>Cerrado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <p>Supermercado Salud y Bienestar. Llevando calidad gallega a tu hogar.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="trabajadores.html">Nuestro Equipo</a></li>
+                    <li><a href="contacto.php">Contacto</a></li>
+                    <li><a href="info.html">Información</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contáctanos</h3>
+                <p>Email: contacto@saludybienestar.com</p>
+                <p>Teléfono: +34 900 123 456</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Supermercados Salud y Bienestar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+
+    <script>
+        const trabajadoresGrid = document.getElementById('trabajadores-grid');
+    
+        // Realizar la solicitud a la API de trabajadores
+        fetch('trabajadores.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos de los trabajadores.');
+                }
+                return response.json();
+            })
+            .then(trabajadores => {
+                // Iterar por cada trabajador y agregarlo al DOM
+                trabajadores.forEach(trabajador => {
+                    const trabajadorCard = document.createElement('div');
+                    trabajadorCard.className = 'card';
+                    trabajadorCard.innerHTML = `
+                        <h3>${trabajador.nombre}</h3>
+                        <h4>${trabajador.cargo}</h4>
+                        <p>${trabajador.descripcion}</p>
+                    `;
+                    trabajadoresGrid.appendChild(trabajadorCard);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+                trabajadoresGrid.innerHTML = '<p>Error al cargar los datos. Inténtalo de nuevo más tarde.</p>';
+            });
+    </script>
+
+    
+    
+</body>
+</html>
